@@ -1,7 +1,7 @@
 {
   "name": "@chahindb7/vue-masonry-wall",
-  "version": "1.0.0",
-  "description": "Responsive masonry layout with SSR support and zero dependencies for Vue 3.",
+  "version": "1.0.1",
+  "description": "Responsive masonry layout with SSR support and zero dependencies for Vue 3 (modified by Chahin).",
   "type": "module",
   "main": "dist/vue-masonry-wall.umd.js",
   "module": "dist/vue-masonry-wall.es.js",
