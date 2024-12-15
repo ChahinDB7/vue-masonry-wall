@@ -1,0 +1,73 @@
+{
+  "name": "@chahindb7/vue-masonry-wall",
+  "version": "1.0.0",
+  "description": "Responsive masonry layout with SSR support and zero dependencies for Vue 3.",
+  "type": "module",
+  "main": "dist/vue-masonry-wall.umd.js",
+  "module": "dist/vue-masonry-wall.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-masonry-wall.es.js",
+      "require": "./dist/vue-masonry-wall.umd.js"
+    },
+    "./style": "./dist/vue-masonry-wall.css"
+  },
+  "types": "dist/vue-masonry-wall.d.ts",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "vite --port 3000",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --fix",
+    "format": "prettier --write src/"
+  },
+  "dependencies": {
+    "vue": "^3.5.13"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.14.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/eslint-config-prettier": "^10.1.0",
+    "eslint": "^9.14.0",
+    "eslint-plugin-vue": "^9.30.0",
+    "prettier": "^3.3.3",
+    "vite": "^6.0.1",
+    "vite-plugin-vue-devtools": "^7.6.5"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 14.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "keywords": [
+    "vue",
+    "plugin",
+    "component",
+    "masonry",
+    "wall"
+  ],
+  "author": "Chahin <chahindb7@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChahinDB7/vue-masonry-wall.git"
+  },
+  "homepage": "https://github.com/ChahinDB7/vue-masonry-wall#readme",
+  "bugs": {
+    "url": "https://github.com/ChahinDB7/vue-masonry-wall/issues"
+  }
+}
