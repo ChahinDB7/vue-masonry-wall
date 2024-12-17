@@ -194,8 +194,6 @@ export function useMasonryWall<T>({
     await fillColumns(0, ++currentRedrawId)
     if (scrollTarget && scrollTarget instanceof HTMLElement) {
       scrollTarget?.scrollBy({ top: scrollY - scrollTarget.scrollTop })
-    } else {
-      window?.scrollTo({ top: scrollY })
     }
     emit('redraw')
   }
