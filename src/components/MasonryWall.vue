@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T">
-import type { Column, NonEmptyArray, redraw } from '@/lib/core'
-import { useMasonryWall } from '@/lib/core'
+import type { Column, NonEmptyArray, redraw } from '../lib/core'
+import { useMasonryWall } from '../lib/core'
 import type { Ref, VNode } from 'vue'
 import { nextTick, onBeforeUnmount, onMounted, ref, toRefs, watch } from 'vue'
 
