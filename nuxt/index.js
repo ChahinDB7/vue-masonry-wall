@@ -10,11 +10,8 @@ export default defineNuxtModule({
   }, 
   defaults: {},
   setup() {
-    console.log('first-module setup')
+    const { resolve } = createResolver(import.meta.url)
 
-      const { resolve } = createResolver(import.meta.url)
-
-        addPlugin(resolve('./plugin.js'))
-    
+    addPlugin(resolve('./plugin.js'))
   }
 })
