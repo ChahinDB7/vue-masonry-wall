@@ -1,8 +1,8 @@
 <script setup lang="ts" generic="T">
-import type { Column, NonEmptyArray, redraw } from '../lib/core'
-import { useMasonryWall } from '../lib/core'
-import type { Ref, VNode } from 'vue'
-import { nextTick, onBeforeUnmount, onMounted, ref, toRefs, watch } from 'vue'
+import type { Column, NonEmptyArray, redraw } from '../lib/core';
+import { useMasonryWall } from '../lib/core';
+import type { Ref, VNode } from 'vue';
+import { nextTick, onBeforeUnmount, onMounted, ref, toRefs, watch } from 'vue';
 
 export type KeyMapper<T> = (
   item: T,
@@ -20,7 +20,8 @@ const props = withDefaults(
     ssrColumns?: number | undefined
     scrollContainer?: HTMLElement | null | undefined
     minColumns?: number | undefined
-    maxColumns?: number | undefined
+    maxColumns?: number | undefined,
+    only1Row?: boolean | undefined,
     keyMapper?: KeyMapper<T> | undefined
   }>(),
   {
@@ -28,29 +29,33 @@ const props = withDefaults(
     gap: 0,
     minColumns: 1,
     rtl: false,
+    only1Row: false,
     scrollContainer: null,
-    ssrColumns: 0,
-  },
-)
+    ssrColumns: 0
+  }
+);
 
 const emit = defineEmits<{
   (event: 'redraw'): void
   (event: 'redrawSkip'): void
-}>()
+}>();
 
 defineSlots<{
   default?: (props: {
     item: T
     column: number
     row: number
-    index: number
+    index: number,
+    remainingItems: number
+    hadMultipleRows: boolean,
+    isLastColumn: boolean,
   }) => VNode
-}>()
+}>();
 
-const columns = ref<Column[]>([])
-const wall = ref<HTMLDivElement>() as Ref<HTMLDivElement>
+const columns = ref<Column[]>([]);
+const wall = ref<HTMLDivElement>() as Ref<HTMLDivElement>;
 
-const { getColumnWidthTarget } = useMasonryWall<T>({
+const { hadMultipleRows, filteredColumns, remainingItems, isLastColumn, getColumnWidthTarget } = useMasonryWall<T>({
   columns,
   emit,
   nextTick,
@@ -59,8 +64,8 @@ const { getColumnWidthTarget } = useMasonryWall<T>({
   vue: 3,
   wall,
   watch,
-  ...toRefs(props),
-})
+  ...toRefs(props)
+});
 </script>
 
 <template>
@@ -70,7 +75,7 @@ const { getColumnWidthTarget } = useMasonryWall<T>({
     :style="{ display: 'flex', gap: `${gap}px` }"
   >
     <div
-      v-for="(column, columnIndex) in columns"
+      v-for="(column, columnIndex) in filteredColumns"
       :key="columnIndex"
       class="masonry-column"
       :data-index="columnIndex"
@@ -101,6 +106,9 @@ const { getColumnWidthTarget } = useMasonryWall<T>({
           :column="columnIndex"
           :row="row"
           :index="itemIndex"
+          :had-multiple-rows="hadMultipleRows"
+          :is-last-column="isLastColumn(columnIndex)"
+          :remaining-items="remainingItems"
         >
           {{ items[itemIndex] }}
         </slot>
